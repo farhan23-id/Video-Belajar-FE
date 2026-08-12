@@ -143,6 +143,13 @@
     line-height: 120%;
 }
 
+@utility heading-7 {
+    @apply headingBase;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 120%;
+}
+
 @utility bodyLarge {
     font-family: var(--font-DMsans);
     font-style: Bold;

@@ -11,9 +11,9 @@ function ProfilePicture({
   return (
     <button
       onClick={onClick}
-      className={`cursor-pointer active:scale-95 ${className}`}
+      className={`cursor-pointer active:scale-95 rounded-[10px] ${className}`}
     >
-      <img className="size-11 rounded-[10px]" src={src} alt="Profile.jpg" />
+      <img className="rounded-[10px]" src={src} alt="Profile.jpg" />
     </button>
   );
 }

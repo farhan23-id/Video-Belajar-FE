@@ -14,7 +14,7 @@ const menuItems = [
   { label: "Keluar", path: "/logout", type: "authOnly", isLogout: true },
 ];
 
-function NavbarRight({ isLogin = false }) {
+function NavbarRight({ isLogin = true }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -53,7 +53,7 @@ function NavbarRight({ isLogin = false }) {
       {isLogin ? (
         <ProfilePicture
           onClick={handleToggle}
-          className={`hidden lg:inline-block`}
+          className={`hidden size-11 lg:inline-block`}
         />
       ) : (
         <div className="hidden lg:flex gap-4">
