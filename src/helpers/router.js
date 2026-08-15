@@ -5,9 +5,9 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Page404 from "../pages/Page404";
 
-import EditProfileForm from "../components/organism/EditProfileForm";
-import ProfileNav from "../components/organism/ProfileNav";
-import ProfilePage from "../pages/profile/ProfilePage";
+import EditProfileForm from "../features/profile/components/EditProfileForm";
+import ProfileNav from "../features/profile/components/ProfileNav";
+import ProfilePage from "../pages/ProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
   },
   {
     path: "test",
-    Component: EditProfileForm,
+    Component: ProfilePage,
   },
   {
     path: "test2",
