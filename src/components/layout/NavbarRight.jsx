@@ -9,10 +9,10 @@ import useAuthStore from "../../features/auth/stores/authStore";
 const menuItems = [
   { label: "Login", path: "/login", type: "guestOnly" },
   { label: "Register", path: "/register", type: "guestOnly" },
-  { label: "Profil Saya", path: "/profil", type: "authOnly" },
+  { label: "Profil Saya", path: "/editProfile", type: "authOnly" },
   { label: "Kelas Saya", path: "/kelas", type: "always" },
   { label: "Pesanan Saya", path: "/pesanan", type: "always" },
-  { label: "Keluar", path: "/logout", type: "authOnly", isLogout: true },
+  { label: "Keluar", path: "/", type: "authOnly", isLogout: true },
 ];
 
 function NavbarRight() {
@@ -20,7 +20,7 @@ function NavbarRight() {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
-  const { isLogin, logout } = useAuthStore();
+  const { user, isLogin, logout } = useAuthStore();
 
   const filteredMenu = menuItems.filter((item) => {
     if (item.type === "always") return true;
@@ -60,6 +60,7 @@ function NavbarRight() {
         <ProfilePicture
           onClick={handleToggle}
           className={`hidden size-11 lg:inline-block`}
+          src={user?.avatar || undefined}
         />
       ) : (
         <div className="hidden lg:flex gap-4">

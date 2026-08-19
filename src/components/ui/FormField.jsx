@@ -7,11 +7,12 @@ function FormField({
   type,
   showPassword,
   onTogglePassword,
+  htmlFor,
   ...inputProps
 }) {
   return (
     <div className="flex flex-col">
-      <Label>{label}</Label>
+      <Label htmlFor={htmlFor}>{label}</Label>
       <Input
         id={id}
         type={type}

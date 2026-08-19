@@ -8,7 +8,7 @@ const styles = {
     disabledContained: 'bg-greyscale-400 border border-greyscale-400 text-textDark-disabled',
     disabledShadow: 'bg-greyscale-300 border border-greyscale-300 text-textDark-disabled',
     disabledOutlined: 'bg-greyscale-200 border border-textDark-disabled text-textDark-disabled',
-    blank: 'bg-primaryBg border border-border text-textDark-secondary',
+    blank: 'border text-textDark-secondary',
 }
 
 

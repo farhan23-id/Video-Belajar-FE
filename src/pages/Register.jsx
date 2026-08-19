@@ -9,9 +9,23 @@ function Register() {
   const navigate = useNavigate();
   const login = useAuthStore((state) => state.login);
 
-  const handleRegister = async ({ name, email, password }) => {
+  const handleRegister = async ({
+    name,
+    email,
+    password,
+    gender,
+    countryCode,
+    phoneNumber,
+  }) => {
     try {
-      const newUser = await registerUser({ name, email, password });
+      const newUser = await registerUser({
+        name,
+        email,
+        password,
+        gender,
+        countryCode,
+        phoneNumber,
+      });
       login(newUser);
       navigate("/");
     } catch (err) {

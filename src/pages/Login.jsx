@@ -15,7 +15,7 @@ function Login() {
       login(user);
       navigate("/");
     } catch (err) {
-      alert(err.msg);
+      alert(err.message);
     }
   };
 

@@ -3,15 +3,32 @@ import Fieldset from "../../../components/ui/Fieldset";
 import Input from "../../../components/ui/Input";
 import Button from "../../../components/ui/Button";
 import useTogglePassword from "../../../hooks/useTogglePassword";
+import useAuthStore from "../../auth/stores/authStore";
+import { useNavigate } from "react-router";
+import { updateUser, deleteUser } from "../../auth/services/AuthService";
 
-function EditProfileForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [gender, setGender] = useState("");
-  const [countryCode, setCountryCode] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+function EditProfileForm({ user }) {
+  const navigate = useNavigate();
+  const { login, logout } = useAuthStore();
+
+  const [form, setForm] = useState({
+    name: user.name || "",
+    email: user.email || "",
+    gender: user.gender || "",
+    countryCode: user.countryCode || "",
+    phoneNumber: user.phoneNumber || "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const { showPassword, togglePassword } = useTogglePassword();
   const {
@@ -19,35 +36,82 @@ function EditProfileForm() {
     togglePassword: toggleConfirmPassword,
   } = useTogglePassword();
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (form.password && form.password !== form.confirmPassword) {
+      alert("Konfirmasi password tidak cocok");
+      return;
+    }
+
+    // eslint-disable-next-line no-unused-vars
+    const { confirmPassword, ...userData } = form;
+
+    const payload = {
+      ...user,
+      ...userData,
+      password: form.password || user.password,
+    };
+
+    try {
+      const updated = await updateUser(user.id, payload);
+
+      login(updated);
+
+      alert("Profile berhasil diperbarui");
+    } catch (err) {
+      alert(err.message || "Gagal memperbarui profile");
+    }
+  };
+
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      "Yakin ingin menghapus akun? Tindakan ini tidak bisa dibatalkan",
+    );
+    if (!confirmDelete) return;
+
+    try {
+      await deleteUser(user.id);
+      logout();
+      navigate("/");
+    } catch (err) {
+      alert(err.message || "Gagal menghapus akun");
+    }
+  };
+
   return (
-    <div className="flex flex-col gap-4 lg:gap-5">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 lg:gap-5">
       <Fieldset label="Nama Lengkap">
         <Input
           variant="profilePage"
           type="text"
           required={true}
           placeholder="Masukkan Nama Anda"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={form.name}
+          onChange={handleChange}
         />
       </Fieldset>
-      <Fieldset label="Email">
+      <Fieldset label="E-Mail">
         <Input
           variant="profilePage"
-          type="e-mail"
+          type="email"
           required={true}
           placeholder="Masukkan E-mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={form.email}
+          onChange={handleChange}
         />
       </Fieldset>
       <Fieldset label="Jenis Kelamin">
         <select
-          name="sex"
-          id="sex"
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
-          className={`min-h-12.25 w-full mr-2 bg-transparent outline-none cursor-pointer bodyMedium-R ${gender === "" ? "text-textDark-secondary" : "text-textDark-primary"}`}
+          name="gender"
+          id="gender"
+          value={form.gender}
+          onChange={handleChange}
+          className={`min-h-12.25 w-full mr-2 bg-transparent outline-none cursor-pointer bodyMedium-R ${
+            form.gender === ""
+              ? "text-textDark-secondary"
+              : "text-textDark-primary"
+          }`}
         >
           <option value="" disabled>
             Masuukan Jenis Kelamin
@@ -70,8 +134,8 @@ function EditProfileForm() {
             name="countryCode"
             id="countryCode"
             aria-label="Kode Negara"
-            value={countryCode}
-            onChange={(e) => setCountryCode(e.target.value)}
+            value={form.countryCode}
+            onChange={handleChange}
             required
           >
             <option value="+62">+62</option>
@@ -84,10 +148,12 @@ function EditProfileForm() {
           <Input
             variant="profilePage"
             type="tel"
+            name="phoneNumber"
             required={true}
             placeholder="Masukkan No. Hp"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            value={form.phoneNumber}
+            onChange={handleChange}
+            maxLength={12}
           />
         </Fieldset>
       </div>
@@ -96,12 +162,12 @@ function EditProfileForm() {
         <Input
           variant="profilePage"
           type="password"
-          required={true}
+          name="password"
           onTogglePassword={togglePassword}
           showPassword={showPassword}
           placeholder="Masukkan Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={form.password}
+          onChange={handleChange}
         />
       </Fieldset>
 
@@ -109,24 +175,33 @@ function EditProfileForm() {
         <Input
           variant="profilePage"
           type="password"
-          required={true}
+          name="confirmPassword"
           onTogglePassword={toggleConfirmPassword}
           showPassword={showConfirmPassword}
-          placeholder="Masukkan Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          placeholder="Masukkan Konfirmasi Password"
+          value={form.confirmPassword}
+          onChange={handleChange}
         />
       </Fieldset>
 
-      <div className="flex lg:justify-end">
+      <div className="flex flex-col gap-3 lg:flex-row lg:justify-end">
         <Button
-          variant="primadryContaine"
+          variant="blank"
+          className="border-error-default bg-error-default text-textLight-primary"
+          onClick={handleDelete}
+        >
+          Delete
+        </Button>
+
+        <Button
+          type="submit"
+          variant="primaryContained"
           className="bodySmall-B lg:bodyMedium-B w-full lg:w-fit"
         >
           Simpan
         </Button>
       </div>
-    </div>
+    </form>
   );
 }
 

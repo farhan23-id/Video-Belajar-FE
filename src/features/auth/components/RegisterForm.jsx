@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import useTogglePassword from "../../../hooks/useTogglePassword";
 
 import FormField from "../../../components/ui/FormField";
+import Label from "../../../components/ui/Label";
 import PhoneField from "../../../components/ui/PhoneField";
 import Button from "../../../components/ui/Button";
 import "../../../styles/App.css";
@@ -24,7 +25,11 @@ function RegisterForm({ onSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ name, email, password });
+    if (password !== confirmPassword) {
+      alert("Konfirmasi password tidak cocok");
+      return;
+    }
+    onSubmit({ name, email, password, gender, countryCode, phoneNumber });
   };
 
   const navigate = useNavigate();
@@ -55,6 +60,7 @@ function RegisterForm({ onSubmit }) {
           <div className="flex flex-col gap-3 lg:gap-6">
             <FormField
               id="fullName"
+              htmlFor="fullName"
               label="Nama Lengkap"
               type="text"
               placeholder="Wowo Ubianto"
@@ -65,6 +71,7 @@ function RegisterForm({ onSubmit }) {
 
             <FormField
               id="email"
+              htmlFor="email"
               label="E-mail"
               type="email"
               placeholder="nama123@email.com"
@@ -73,10 +80,41 @@ function RegisterForm({ onSubmit }) {
               required
             />
 
-            <PhoneField />
+            <div>
+              <Label htmlFor="gender">Jenis Kelamin</Label>
+              <select
+                id="gender"
+                name="gender"
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+                className={`w-full h-12 border border-border rounded-md py-1 px-3 bg-transparent appearance-none outline-none cursor-pointer bodyMedium-R ${gender === "" ? "text-textDark-secondary" : "text-textDark-primary"}`}
+                style={{
+                  backgroundImage: "url(/asset/icon/arrow_2.png)",
+                  backgroundPosition: "right 12px center",
+                  backgroundSize: "24px",
+                  backgroundRepeat: "no-repeat",
+                }}
+              >
+                <option value="" disabled>
+                  Masukan Jenis Kelamin
+                </option>
+                <option value="laki-laki" className="text-textDark-primary">
+                  Laki-Laki
+                </option>
+                <option value="perempuan">Perempuan</option>
+              </select>
+            </div>
+
+            <PhoneField
+              countryCodeValue={countryCode}
+              countryCodeOnChange={(e) => setCountryCode(e.target.value)}
+              phoneNumberValue={phoneNumber}
+              phoneNumberOnChange={(e) => setPhoneNumber(e.target.value)}
+            />
 
             <FormField
               id="password"
+              htmlFor="password"
               label="Kata Sandi"
               type="password"
               placeholder="••••••••"
@@ -89,6 +127,7 @@ function RegisterForm({ onSubmit }) {
 
             <FormField
               id="confirmPassword"
+              htmlFor="confirmPassword"
               label="Konfirmasi Kata Sandi"
               type="password"
               placeholder="••••••••"
@@ -102,8 +141,8 @@ function RegisterForm({ onSubmit }) {
 
           <div className="flex flex-col gap-4 lg:pt-5">
             <Button
-            type="submit"
-              variant="primadryContained"
+              type="submit"
+              variant="primaryContained"
               className="bodySmall-B lg:bodyMedium-B"
             >
               Daftar

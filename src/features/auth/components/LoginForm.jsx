@@ -45,6 +45,7 @@ function LoginForm({ onSubmit }) {
           <div className="flex flex-col gap-3 lg:gap-6">
             <FormField
               id="email"
+              htmlFor="email"
               label="E-mail"
               type="email"
               placeholder="nama123@email.com"
@@ -55,6 +56,7 @@ function LoginForm({ onSubmit }) {
 
             <FormField
               id="password"
+              htmlFor="password"
               label="Kata Sandi"
               type="password"
               placeholder="••••••••"
@@ -75,6 +77,7 @@ function LoginForm({ onSubmit }) {
 
           <div className="flex flex-col gap-4">
             <Button
+              type="submit"
               variant="primaryContained"
               className="bodySmall-B lg:bodyMedium-B"
             >

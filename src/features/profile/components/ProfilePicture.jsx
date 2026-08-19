@@ -1,8 +1,3 @@
-// interface AvatarProps {
-//   src?: string;
-//   onClick: () => void;
-// }
-
 function ProfilePicture({
   onClick,
   className,

@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     Component: Register,
   },
   {
-    path: "test",
+    path: "editProfile",
     Component: ProfilePage,
   },
   {
