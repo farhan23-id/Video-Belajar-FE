@@ -9,15 +9,15 @@
 }
 
 .country-wrapper:has(option[value="+62"]:checked) .flag-icon {
-    background-image: url('asset/icon/Indonesia.png');
+    background-image: url('/asset/icon/Indonesia.png');
 }
 
 .country-wrapper:has(option[value="+60"]:checked) .flag-icon {
-    background-image: url('asset/icon/Malaysia.png');
+    background-image: url('/asset/icon/Malaysia.png');
 }
 
 .country-wrapper:has(option[value="+61"]:checked) .flag-icon {
-    background-image: url('asset/icon/Japan.png');
+    background-image: url('/asset/icon/Japan.png');
 }
 
 .stars {
