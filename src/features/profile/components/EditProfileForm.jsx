@@ -158,7 +158,7 @@ function EditProfileForm({ user }) {
         </Fieldset>
       </div>
 
-      <Fieldset label="Password">
+      <Fieldset label="Password Baru">
         <Input
           variant="profilePage"
           type="password"
@@ -171,7 +171,7 @@ function EditProfileForm({ user }) {
         />
       </Fieldset>
 
-      <Fieldset label="Konfirmasi Password">
+      <Fieldset label="Konfirmasi Password Baru">
         <Input
           variant="profilePage"
           type="password"
@@ -190,7 +190,7 @@ function EditProfileForm({ user }) {
           className="border-error-default bg-error-default text-textLight-primary"
           onClick={handleDelete}
         >
-          Delete
+          Hapus
         </Button>
 
         <Button

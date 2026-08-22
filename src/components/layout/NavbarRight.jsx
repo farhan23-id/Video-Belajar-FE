@@ -9,6 +9,7 @@ import useAuthStore from "../../features/auth/stores/authStore";
 const menuItems = [
   { label: "Login", path: "/login", type: "guestOnly" },
   { label: "Register", path: "/register", type: "guestOnly" },
+  { label: "Admin Dashboard", path: "/adminDashboard", role: "admin" },
   { label: "Profil Saya", path: "/editProfile", type: "authOnly" },
   { label: "Kelas Saya", path: "/kelas", type: "always" },
   { label: "Pesanan Saya", path: "/pesanan", type: "always" },
@@ -23,6 +24,11 @@ function NavbarRight() {
   const { user, isLogin, logout } = useAuthStore();
 
   const filteredMenu = menuItems.filter((item) => {
+
+    if (item.role) {
+      return isLogin && user?.role === item.role;
+    }
+
     if (item.type === "always") return true;
     return isLogin ? item.type === "authOnly" : item.type === "guestOnly";
   });

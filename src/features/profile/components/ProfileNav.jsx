@@ -1,4 +1,5 @@
 import ProfileNavItem from "./ProfileNavItem";
+import { UserRoundPen, BookMarked, ShoppingBasket } from "lucide-react";
 
 function ProfileNav({ activeMenu, onSelectMenu }) {
   const profileNavData = [
@@ -6,21 +7,21 @@ function ProfileNav({ activeMenu, onSelectMenu }) {
       path: "edit-profile",
       header: "Ubah Profile",
       description: "Ubah Data Diri Anda",
-      icon: "O",
+      icon: <UserRoundPen />,
       label: "Profile",
     },
     {
       path: "my-class",
       header: "Kelas Saya",
       description: "Daftar Kelas Saya",
-      icon: "O",
+      icon: <BookMarked />,
       label: "Kelas Saya",
     },
     {
       path: "my-order",
       header: "Pesanan Saya",
       description: "Daftar Pesanan Saya",
-      icon: "O",
+      icon: <ShoppingBasket />,
       label: "Pesanan Saya",
     },
   ];
@@ -29,7 +30,7 @@ function ProfileNav({ activeMenu, onSelectMenu }) {
     profileNavData.find((e) => e.path === activeMenu) ?? profileNavData[0];
 
   return (
-    <div className="w-full flex flex-col gap-6 max-w-73">
+    <div className="w-full flex flex-col gap-6 lg:max-w-73">
       <div className="flex flex-col gap-2.5">
         <h5 className="heading-7 text-textDark-primary lg:heading-5">
           {activeItem.header}

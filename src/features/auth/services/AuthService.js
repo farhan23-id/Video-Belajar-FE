@@ -21,6 +21,7 @@ export async function registerUser({
   gender,
   countryCode,
   phoneNumber,
+  role = "user",
 }) {
   const { data: users } = await axiosUsers.get("/users");
   const exists = users.some((u) => u.email === email);
@@ -37,6 +38,7 @@ export async function registerUser({
     countryCode: countryCode || "",
     phoneNumber: phoneNumber || "",
     avatar: "",
+    role,
   });
 
   return newUser;
