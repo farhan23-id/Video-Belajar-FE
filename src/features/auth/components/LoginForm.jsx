@@ -68,7 +68,7 @@ function LoginForm({ onSubmit }) {
             />
 
             <NavLink
-              to="/lupa-passsword"
+              to="/lupa-password"
               className="text-right bodySmall-M lg:bodyMedium-M text-textDark-secondary active:text-info-pressed"
             >
               Lupa Password?

@@ -1,7 +1,7 @@
 import Navbar from "./components/layout/Navbar";
 import Hero from "./pages/home/components/Hero";
 import CourseSection from "./features/product/components/CourseSection";
-import BannerCTA from "./pages/home/components/Hero";
+import BannerCTA from "./pages/home/components/BannerCTA";
 import Footer from "./components/layout/Footer";
 
 function App() {

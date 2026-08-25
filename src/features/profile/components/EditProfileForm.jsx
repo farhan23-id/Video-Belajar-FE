@@ -114,7 +114,7 @@ function EditProfileForm({ user }) {
           }`}
         >
           <option value="" disabled>
-            Masuukan Jenis Kelamin
+            Masukkan Jenis Kelamin
           </option>
           <option value="laki-laki" className="text-textDark-primary">
             Laki-Laki
