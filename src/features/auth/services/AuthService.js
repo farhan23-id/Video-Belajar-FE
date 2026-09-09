@@ -35,7 +35,7 @@ export async function registerUser({
     email,
     password,
     gender: gender || "",
-    countryCode: countryCode || "",
+    countryCode: countryCode || "+62",
     phoneNumber: phoneNumber || "",
     avatar: "",
     role,
