@@ -1,7 +1,7 @@
-import { axiosUsers } from "../../../helpers/axiosUsers";
+import { axiosInstance } from "../../../helpers/axiosInstance";
 
 export async function loginUser({ email, password }) {
-  const { data: users } = await axiosUsers.get("/users");
+  const { data: users } = await axiosInstance.get("/users");
 
   const foundUser = users.find(
     (u) => u.email === email && u.password === password,
@@ -23,14 +23,14 @@ export async function registerUser({
   phoneNumber,
   role = "user",
 }) {
-  const { data: users } = await axiosUsers.get("/users");
+  const { data: users } = await axiosInstance.get("/users");
   const exists = users.some((u) => u.email === email);
 
   if (exists) {
     throw new Error("Email sudah terdaftar");
   }
 
-  const { data: newUser } = await axiosUsers.post("/users", {
+  const { data: newUser } = await axiosInstance.post("/users", {
     name,
     email,
     password,
@@ -45,11 +45,14 @@ export async function registerUser({
 }
 
 export async function updateUser(id, updatedData) {
-  const { data: updated } = await axiosUsers.put(`/users/${id}`, updatedData);
+  const { data: updated } = await axiosInstance.put(
+    `/users/${id}`,
+    updatedData,
+  );
   return updated;
 }
 
 export async function deleteUser(id) {
-  const { data: deleted } = await axiosUsers.delete(`/users/${id}`);
+  const { data: deleted } = await axiosInstance.delete(`/users/${id}`);
   return deleted;
 }
