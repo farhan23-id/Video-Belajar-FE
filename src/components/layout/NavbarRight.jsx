@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router";
-import ProfilePicture from "../../features/profile/components/ProfilePicture";
+import ProfilePicture from "../../features/menuProfile/components/ProfilePicture";
 import HamburgerBtn from "../ui/HamburgerBtn";
 import DropdownItem from "../ui/DropdownItem";
 import Button from "../ui/Button";
@@ -10,9 +10,9 @@ const menuItems = [
   { label: "Login", path: "/login", type: "guestOnly" },
   { label: "Register", path: "/register", type: "guestOnly" },
   { label: "Admin Dashboard", path: "/adminDashboard", role: "admin" },
-  { label: "Profil Saya", path: "/editProfile", type: "authOnly" },
-  { label: "Kelas Saya", path: "/kelas", type: "always" },
-  { label: "Pesanan Saya", path: "/pesanan", type: "always" },
+  { label: "Profil Saya", path: "/menu/editProfile", type: "authOnly" },
+  { label: "Kelas Saya", path: "/menu/myCourse", type: "always" },
+  { label: "Pesanan Saya", path: "/menu/chart", type: "always" },
   { label: "Keluar", path: "/", type: "authOnly", isLogout: true },
 ];
 
@@ -24,7 +24,6 @@ function NavbarRight() {
   const { user, isLogin, logout } = useAuthStore();
 
   const filteredMenu = menuItems.filter((item) => {
-
     if (item.role) {
       return isLogin && user?.role === item.role;
     }

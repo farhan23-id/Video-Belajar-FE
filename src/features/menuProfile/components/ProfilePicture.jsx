@@ -1,7 +1,7 @@
 function ProfilePicture({
   onClick,
   className,
-  src = "asset/profile/profile_1.png",
+  src = "/asset/profile/profile_1.png",
 }) {
   return (
     <button

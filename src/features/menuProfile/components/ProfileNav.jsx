@@ -1,24 +1,26 @@
+import { useLocation } from "react-router";
 import ProfileNavItem from "./ProfileNavItem";
 import { UserRoundPen, BookMarked, ShoppingBasket } from "lucide-react";
 
-function ProfileNav({ activeMenu, onSelectMenu }) {
+function ProfileNav() {
+  const location = useLocation()
   const profileNavData = [
     {
-      path: "edit-profile",
+      path: "/menu/editProfile",
       header: "Ubah Profile",
       description: "Ubah Data Diri Anda",
       icon: <UserRoundPen />,
       label: "Profile",
     },
     {
-      path: "my-class",
+      path: "/menu/myCourse",
       header: "Kelas Saya",
       description: "Daftar Kelas Saya",
       icon: <BookMarked />,
       label: "Kelas Saya",
     },
     {
-      path: "my-order",
+      path: "/menu/chart",
       header: "Pesanan Saya",
       description: "Daftar Pesanan Saya",
       icon: <ShoppingBasket />,
@@ -27,7 +29,7 @@ function ProfileNav({ activeMenu, onSelectMenu }) {
   ];
 
   const activeItem =
-    profileNavData.find((e) => e.path === activeMenu) ?? profileNavData[0];
+    profileNavData.find((e) => e.path === location.pathname) ?? profileNavData[0];
 
   return (
     <div className="w-full flex flex-col gap-6 lg:max-w-73">
@@ -46,8 +48,8 @@ function ProfileNav({ activeMenu, onSelectMenu }) {
             key={element.path}
             icon={element.icon}
             label={element.label}
-            isActive={activeMenu === element.path}
-            onClick={() => onSelectMenu(element.path)}
+            isActive={location.pathname === element.path}
+            to={element.path}
           />
         ))}
       </div>

@@ -1,11 +1,11 @@
-import TabItem from "../../../components/ui/TabItem";
+import TabItem from "../../../../components/ui/TabItem";
 
-function CategoryTabs({ activeCategory, onSelectCategory }) {
+function ChartNav({activeCategory, onSelectCategory}) {
   const categories = [
-    { id: "all", name: "Semua Kelas" },
-    { id: "web-dev", name: "Web Development" },
-    { id: "design", name: "Design" },
-    { id: "data-science", name: "Data Science" },
+    { id: "all", name: "Semua Pesanan" },
+    { id: "waiting", name: "Menunggu" },
+    { id: "success", name: "Berhasil" },
+    { id: "failed", name: "Gagal" },
   ];
 
   return (
@@ -22,4 +22,4 @@ function CategoryTabs({ activeCategory, onSelectCategory }) {
   );
 }
 
-export default CategoryTabs;
+export default ChartNav;
