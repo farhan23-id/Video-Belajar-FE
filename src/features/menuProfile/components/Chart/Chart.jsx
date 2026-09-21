@@ -28,8 +28,6 @@ function Chart() {
     return item.status === activeCategory;
   });
 
-  console.log(filteredItems);
-
   return (
     <div className="w-full bg-primaryBg border border-border rounded-[10px] p-5 flex flex-col gap-6">
       <ChartNav
