@@ -1,4 +1,5 @@
 const styles = {
+  chartSearch: "border-none w-full h-full outline-none pl-[5px] bodyMedium-M",
   default: "w-full h-12 border border-border rounded-md py-1 px-2.5",
   profilePage:
     "w-full h-[47px] px-1 bodyMedium-R text-textDark-primary outline-none",

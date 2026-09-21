@@ -87,9 +87,9 @@ function NavbarRight() {
       {isOpen && (
         <div className="absolute right-0 mt-2 w-50 rounded-md bg-white shadow-[0_0px_1px_0px_rgba(62,67,74,0.31),0_18px_28px_0px_rgba(62,67,74,0.15)] z-50 ">
           <div className="py-0.5">
-            {filteredMenu.map((item, index) => (
+            {filteredMenu.map((item) => (
               <DropdownItem
-                key={index}
+                key={item.label}
                 label={item.label}
                 to={item.path}
                 isLogin={item.isLogout || false}

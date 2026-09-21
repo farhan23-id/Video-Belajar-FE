@@ -12,7 +12,7 @@ function EditProfile() {
 
   return (
     <div className="w-full bg-primaryBg border border-border rounded-[10px] p-6 flex flex-col gap-6">
-      <ProfileHeader />
+      <ProfileHeader name={user.name} email={user.email} />
 
       <hr />
 
